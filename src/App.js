@@ -1,25 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+  // Link
+} from "react-router-dom";
+
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+
+import HomePage from "./pages/HomePage";
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
+import AboutPage from "./pages/AboutPage";
+import RegisterPage from "./pages/RegisterPage";
+import ShopPage from "./pages/ShopPage";
+
+library.add(fas);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <NavBar />
+      <main role="main">
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/register" component={RegisterPage} />
+          <Route exact path="/shop/:id" component={ShopPage} />
+          <Route path="/about" component={AboutPage} />
+        </Switch>
+      </main>
+      <Footer />
+    </Router>
   );
 }
 
